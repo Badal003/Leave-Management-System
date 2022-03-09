@@ -20,5 +20,5 @@ public class Designation
     @Column(name = "NAME")
     private String designationName;
     @Column(name = "DESCRIPTION")
-    private String desiganationDescription;
+    private String designationDescription;
 }

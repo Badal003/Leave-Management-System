@@ -13,7 +13,7 @@ public class DepartmentController
     @Autowired
     private DepartmentService departmentService;
 
-    @PostMapping("/department")
+    @PostMapping("/adddepartment")
     public Department AddDepartment(@RequestBody Department department)
     {
         return departmentService.saveDepartment(department);

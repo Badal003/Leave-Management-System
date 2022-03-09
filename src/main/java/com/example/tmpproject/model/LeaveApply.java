@@ -24,6 +24,12 @@ public class LeaveApply
     private Date toDate;
     @Column(name = "STATUS")
     private int status;
-    private int leavetypeId;
-    private int employeeId;
+    //private int leavetypeId;
+    @ManyToOne
+    @JoinColumn(name = "LT_ID")
+    private LeaveType leaveType;
+    //private int employeeId;
+    @OneToOne
+    @JoinColumn(name = "EMP_ID")
+    private Employee employee;
 }

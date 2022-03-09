@@ -36,7 +36,17 @@ public class Employee
     private Date dateOfBirth;
     @Column(name = "DOJ")
     private Date dateOfJoin;
-    private int departmentId;
-    private int designationId;
-    private int userroleId;
+
+    //private int departmentId;
+    @OneToOne
+    @JoinColumn(name = "DEPT_ID")
+    private Department department;
+    //private int designationId;
+    @OneToOne
+    @JoinColumn(name = "DESIGN_ID")
+    private Designation designation;
+    //private int userroleId;
+    @OneToOne
+    @JoinColumn(name = "UR_ID")
+    private UserRole userRole;
 }
