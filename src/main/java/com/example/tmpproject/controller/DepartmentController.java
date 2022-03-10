@@ -18,5 +18,12 @@ public class DepartmentController
     {
         return departmentService.saveDepartment(department);
     }
-
+    @PostMapping("/updatedepartment")
+    public Department UpdateDepartment(@RequestBody Department department)
+    {
+        Department department1=departmentService.findByDepartment(department.getDepartmentId());
+        department1.setDepartmentFullName(department.getDepartmentFullName());
+        department1.setDepartmentShortName(department.getDepartmentShortName());
+        return departmentService.saveDepartment(department1);
+   }
 }

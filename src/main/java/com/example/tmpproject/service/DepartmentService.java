@@ -15,4 +15,9 @@ public class DepartmentService
     {
         return departmentRepositry.save(department);
     }
+    public Department findByDepartment(int did)
+    {
+        return departmentRepositry.findById(did);
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.example.tmpproject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.Date;
 public class Employee
 {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMP_ID")
     private int employeeId;
@@ -33,20 +36,24 @@ public class Employee
     @Column(name = "PASSWORD")
     private String password;
     @Column(name = "DOB")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     @Column(name = "DOJ")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date dateOfJoin;
 
     //private int departmentId;
-    @OneToOne
-    @JoinColumn(name = "DEPT_ID")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "DEPT_ID",referencedColumnName = "DEPT_ID")
     private Department department;
     //private int designationId;
-    @OneToOne
-    @JoinColumn(name = "DESIGN_ID")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "DESIGN_ID",referencedColumnName = "DESIGN_ID")
     private Designation designation;
     //private int userroleId;
-    @OneToOne
-    @JoinColumn(name = "UR_ID")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "UR_ID",referencedColumnName = "UR_ID")
     private UserRole userRole;
 }

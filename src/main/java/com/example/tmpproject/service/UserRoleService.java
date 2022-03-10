@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 public class UserRoleService {
     @Autowired
     private UserRoleRepositry userRoleRepositry;
-    public UserRole saveUserRole(UserRole userRole)
-    {
-        return userRoleRepositry.save(userRole);
-    }
+    public UserRole saveUserRole(UserRole userRole){return userRoleRepositry.save(userRole);}
+    public UserRole findUserRole(int id){return userRoleRepositry.findById(id);}
 }

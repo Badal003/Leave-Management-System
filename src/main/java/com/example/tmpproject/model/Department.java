@@ -1,5 +1,6 @@
 package com.example.tmpproject.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +15,16 @@ import javax.persistence.*;
 public class Department
 {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DEPT_ID")
     private int departmentId;
-    @Column(name = "SHORTNAME")
+    @Column(unique = true, nullable = false,name = "SHORTNAME")
     private String departmentShortName;
-    @Column(name = "FULLNAME")
+    @Column(unique = true, nullable = false,name = "FULLNAME")
     private String departmentFullName;
+    @OneToOne(mappedBy = "department")
+    private Employee employee;
 }
 
 

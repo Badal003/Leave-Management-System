@@ -1,5 +1,6 @@
 package com.example.tmpproject.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 public class Designation
 {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DESIGN_ID")
     private int designationId;
@@ -21,4 +23,6 @@ public class Designation
     private String designationName;
     @Column(name = "DESCRIPTION")
     private String designationDescription;
+    @OneToOne(mappedBy = "designation")
+    private Employee employee;
 }

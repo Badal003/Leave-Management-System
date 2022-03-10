@@ -16,5 +16,6 @@ public class DesignationService
     {
         return  designationRepositry.save(designation);
     }
+    public Designation findDesination(int id){return designationRepositry.findById(id);};
 
 }
