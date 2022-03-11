@@ -5,6 +5,8 @@ import com.example.tmpproject.repository.DepartmentRepositry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DepartmentService
 {
@@ -19,5 +21,6 @@ public class DepartmentService
     {
         return departmentRepositry.findById(did);
     }
+    public List<Department> findAllDepartment(){return departmentRepositry.findAllBy();};
 
 }
