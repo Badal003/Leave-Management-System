@@ -22,6 +22,4 @@ public class UserRole
     private int userroleId;
     @Column(unique = true, nullable = false,name = "NAME")
     private String userroleName;
-    @OneToOne(mappedBy = "userRole")
-    private Employee employee;
 }

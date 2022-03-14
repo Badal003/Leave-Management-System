@@ -13,14 +13,11 @@ public class DepartmentService
     @Autowired
     private DepartmentRepositry departmentRepositry;
 
-    public Department saveDepartment(Department department)
-    {
-        return departmentRepositry.save(department);
-    }
-    public Department findByDepartment(int did)
-    {
-        return departmentRepositry.findById(did);
-    }
-    public List<Department> findAllDepartment(){return departmentRepositry.findAllBy();};
 
+
+    public Department saveDepartment(Department department){return departmentRepositry.save(department);}
+    public Department findByDepartment(int did){return departmentRepositry.findById(did);}
+    public List<Department> findAllDepartment(){return departmentRepositry.findAllBy();};
+    public Department deleteDepartmentById(int did){return departmentRepositry.deleteById(did);}
+    public Long count(){return departmentRepositry.count();}
 }

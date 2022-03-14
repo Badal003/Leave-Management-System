@@ -23,8 +23,7 @@ public class Department
     private String departmentShortName;
     @Column(unique = true, nullable = false,name = "FULLNAME")
     private String departmentFullName;
-    @OneToOne(mappedBy = "department")
-    private Employee employee;
+
 }
 
 

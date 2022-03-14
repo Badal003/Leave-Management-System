@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface DepartmentRepositry extends JpaRepository<Department,Integer>
 {
-    public Department findById(int dest_id);
+    public Department findById(int depart_id);
     public List<Department> findAllBy();
+    public Department deleteById(int depart_id);
 }

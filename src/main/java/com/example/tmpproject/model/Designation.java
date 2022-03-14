@@ -23,6 +23,5 @@ public class Designation
     private String designationName;
     @Column(name = "DESCRIPTION")
     private String designationDescription;
-    @OneToOne(mappedBy = "designation")
-    private Employee employee;
+
 }
