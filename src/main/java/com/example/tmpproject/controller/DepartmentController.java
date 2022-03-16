@@ -52,7 +52,7 @@ public class DepartmentController
    }
 
    //Delete Department By DepartmentID
-   @PostMapping("/deleteDepartment")
+   @PostMapping("/deletedepartment")
    @CrossOrigin(origins = "http://localhost:4200")
    public Department deleteDepartment(@RequestBody Department department)
    {

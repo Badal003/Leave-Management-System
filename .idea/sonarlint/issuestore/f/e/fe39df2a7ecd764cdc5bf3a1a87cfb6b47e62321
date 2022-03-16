@@ -1,0 +1,11 @@
+
+U
+java:S4684"@Replace this persistent entity with a simple POJO or DTO object.(­¦×
+f
+java:S1128"DRemove this unused import 'com.example.tmpproject.model.Department'.(ĞÅİÿÿÿÿÿ8¼ÄæŞø/
+b
+java:S1128"ERemove this unused import 'com.example.tmpproject.model.Designation'.(“Ãâ‚8½ÄæŞø/
+d
+java:S1128"BRemove this unused import 'com.example.tmpproject.model.UserRole'.(Ú¡óâúÿÿÿÿ8¾ÄæŞø/
+h
+java:S1128"FRemove this unused import 'org.springframework.stereotype.Repository'.(¦ıÍıüÿÿÿÿ8¾ÄæŞø/

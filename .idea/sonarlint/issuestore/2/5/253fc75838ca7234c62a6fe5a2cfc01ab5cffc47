@@ -1,0 +1,7 @@
+
+Q	java:S125"<This block of commented-out lines of code should be removed.(äŸ÷
+X	java:S125 "<This block of commented-out lines of code should be removed.(ó”È„8Æ•¤íö/
+U
+java:S1128"3Remove this unused import 'com.sun.istack.NotNull'.(‡œ£ÿÿÿÿÿ8»í™÷/
+W
+java:S1191"5Use classes from the Java API instead of Sun classes.(‡œ£ÿÿÿÿÿ8„û™÷/
