@@ -24,6 +24,7 @@ public class Department
     @Column(unique = true, nullable = false,name = "FULLNAME")
     private String departmentFullName;
 
+
 }
 
 

@@ -24,4 +24,6 @@ public class Designation
     @Column(name = "DESCRIPTION")
     private String designationDescription;
 
+
+
 }

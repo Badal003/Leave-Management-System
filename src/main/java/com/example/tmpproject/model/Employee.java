@@ -36,11 +36,11 @@ public class Employee
     @Column(name = "PASSWORD")
     private String password;
     @Column(name = "DOB")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     @Column(name = "DOJ")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateOfJoin;
 
