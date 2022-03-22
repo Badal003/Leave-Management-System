@@ -1,6 +1,8 @@
 package com.example.tmpproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,15 +47,18 @@ public class Employee
     private Date dateOfJoin;
 
     //private int departmentId;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "DEPT_ID",referencedColumnName = "DEPT_ID")
     private Department department;
     //private int designationId;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "DESIGN_ID",referencedColumnName = "DESIGN_ID")
     private Designation designation;
     //private int userroleId;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "UR_ID",referencedColumnName = "UR_ID")
     private UserRole userRole;
 }

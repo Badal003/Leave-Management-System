@@ -30,7 +30,7 @@ public class LeaveApply
     @JoinColumn(name = "LT_ID")
     private LeaveType leaveType;
     //private int employeeId;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "EMP_ID")
     private Employee employee;
 }

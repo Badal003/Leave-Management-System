@@ -1,11 +1,13 @@
 package com.example.tmpproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,7 +25,5 @@ public class Designation
     private String designationName;
     @Column(name = "DESCRIPTION")
     private String designationDescription;
-
-
 
 }

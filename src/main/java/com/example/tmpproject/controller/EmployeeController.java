@@ -1,5 +1,6 @@
 package com.example.tmpproject.controller;
 
+import com.example.tmpproject.Module.Employeemodule;
 import com.example.tmpproject.model.Department;
 import com.example.tmpproject.model.Designation;
 import com.example.tmpproject.model.Employee;
@@ -31,41 +32,103 @@ public class EmployeeController
 
     @PostMapping("/addemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Employee AddEmployee(@RequestBody Employee employee)
+    public Employee AddEmployee(@RequestBody Employeemodule employeemodule)
     {
+        Employee employee=new Employee();
+        employee.setFirstName(employeemodule.getFirstName());
+        employee.setMiddleName(employeemodule.getMiddleName());
+        employee.setLastName(employeemodule.getLastName());
+        employee.setGender(employeemodule.getGender());
+        employee.setEmailId(employeemodule.getEmailId());
         employee.setPassword(GeneratePassword.generateRandomPassword());
-//        employee.setDepartment(departmentService.findByDepartment(17));
-//        employee.setDesignation(designationService.findDesination(2));
-//        employee.setUserRole(userRoleService.findUserRole(2));
-        System.out.println(employee.getDepartment());
-        System.out.println(employee.getDesignation());
-        System.out.println(employee.getUserRole());
+        employee.setMobileNumber(employeemodule.getMobileNumber());
+        employee.setDateOfBirth(employeemodule.getDateOfBirth());
+        employee.setDateOfJoin(employeemodule.getDateOfJoin());
+        employee.setDepartment(departmentService.findByDepartment(employeemodule.getDepartmentId()));
+        employee.setDesignation(designationService.findDesination(employeemodule.getDesignationId()));
+        employee.setUserRole(userRoleService.findUserRole(2));
+        //employee.setPassword(GeneratePassword.generateRandomPassword());
         return employeeService.saveEmployee(employee);
     }
     @PostMapping("/findemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Employee FindEmployee(@RequestBody Employee employee){return employeeService.findEmployee(employee.getEmployeeId());}
+    public Employeemodule FindEmployee(@RequestBody Employeemodule employeemodule)
+    {
+
+        Employeemodule employeemodule1=new Employeemodule();
+        Employee employee=employeeService.findEmployee(employeemodule.getId());
+        employeemodule1.setId(employee.getEmployeeId());
+        employeemodule1.setFirstName(employee.getFirstName());
+        employeemodule1.setMiddleName(employee.getMiddleName());
+        employeemodule1.setLastName(employee.getLastName());
+        employeemodule1.setGender(employee.getGender());
+        employeemodule1.setEmailId(employee.getEmailId());
+        employeemodule1.setPassword(GeneratePassword.generateRandomPassword());
+        employeemodule1.setMobileNumber(employee.getMobileNumber());
+        employeemodule1.setDateOfBirth(employee.getDateOfBirth());
+        employeemodule1.setDateOfJoin(employee.getDateOfJoin());
+        Designation designation=employee.getDesignation();
+        Department department=employee.getDepartment();
+        UserRole userRole=employee.getUserRole();
+        employeemodule1.setDepartmentId(department.getDepartmentId());
+        employeemodule1.setDesignationId(designation.getDesignationId());
+        employeemodule1.setUserroleId(userRole.getUserroleId());
+        return employeemodule1;
+    }
     @PostMapping("/findallemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<Employee> FindAllEmployee(){return employeeService.findAllEmployee();}
+    public List<Employee> FindAllEmployee()
+    {
+        return employeeService.findAllEmployee();
+    }
+
     @PostMapping("/updateemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Employee UpdateEmployee(@RequestBody Employee employee)
+    public Employee UpdateEmployee(@RequestBody Employeemodule employeemodule)
     {
-        Employee employee1=employeeService.findEmployee(employee.getEmployeeId());
-        employee1.setFirstName(employee.getFirstName());
-        employee1.setMiddleName(employee.getMiddleName());
-        employee1.setLastName(employee.getLastName());
-        employee1.setGender(employee.getGender());
-        employee1.setMobileNumber(employee.getMobileNumber());
-        employee1.setDateOfBirth(employee.getDateOfBirth());
-        employee1.setDateOfJoin(employee.getDateOfJoin());
-        employee1.setDepartment(employee.getDepartment());
-        employee1.setDesignation(employee.getDesignation());
-        employee1.setUserRole(employee.getUserRole());
-        return employeeService.saveEmployee(employee1);
+        Employee employee=employeeService.findEmployee(employeemodule.getId());
+        employee.setFirstName(employeemodule.getFirstName());
+        employee.setMiddleName(employeemodule.getMiddleName());
+        employee.setLastName(employeemodule.getLastName());
+        employee.setGender(employeemodule.getGender());
+        employee.setEmailId(employeemodule.getEmailId());
+        employee.setMobileNumber(employeemodule.getMobileNumber());
+        employee.setDateOfBirth(employeemodule.getDateOfBirth());
+        employee.setDateOfJoin(employeemodule.getDateOfJoin());
+        employee.setDepartment(departmentService.findByDepartment(employeemodule.getDepartmentId()));
+        employee.setDesignation(designationService.findDesination(employeemodule.getDesignationId()));
+        return employeeService.saveEmployee(employee);
     }
     @PostMapping("/deleteemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Employee DeleteEmployee(@RequestBody Employee employee){return employeeService.deleteEmployee(employee.getEmployeeId());}
+    public Employee DeleteEmployee(@RequestBody Employee employee)
+    {
+        Employee employee1=employeeService.findEmployee(employee.getEmployeeId());
+        employee1.setDepartment(null);
+        employee1.setDesignation(null);
+        employee1.setUserRole(null);
+        employee1=employeeService.saveEmployee(employee1);
+        return employeeService.deleteEmployee(employee1.getEmployeeId());
+    }
+
+    @PostMapping("/findemployeebydepartment")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<Employee> findEmployeeByDepartment(@RequestBody Employeemodule employeemodule)
+    {
+        Department department=departmentService.findByDepartment(employeemodule.getDepartmentId());
+        return employeeService.findEmployeeByDepartment(department);
+    }
+
+    @PostMapping("/updateEmployeeByUserrole")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Employee updateEmployeeByUserRole(@RequestBody Employeemodule employeemodule)
+    {
+        System.out.println(employeemodule);
+        Employee employee=employeeService.findEmployee(employeemodule.getId());
+        System.out.println(employee);
+        UserRole userRole=userRoleService.findUserRole(employeemodule.getUserroleId());
+        System.out.println(userRole);
+        employee.setUserRole(userRole);
+        return employeeService.saveEmployee(employee);
+    }
 }
