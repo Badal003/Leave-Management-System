@@ -23,6 +23,4 @@ public class LeaveType
     private String leaveName;
     @Column(unique = true, nullable = false,name = "DESCRIPTION")
     private String leaveDescription;
-    @Column(name = "DAYS_ALLOWED")
-    private int leaveDaysAllowed;
 }

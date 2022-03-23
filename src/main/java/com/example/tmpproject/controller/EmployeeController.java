@@ -54,7 +54,6 @@ public class EmployeeController
     @CrossOrigin(origins = "http://localhost:4200")
     public Employeemodule FindEmployee(@RequestBody Employeemodule employeemodule)
     {
-
         Employeemodule employeemodule1=new Employeemodule();
         Employee employee=employeeService.findEmployee(employeemodule.getId());
         employeemodule1.setId(employee.getEmployeeId());
@@ -129,6 +128,13 @@ public class EmployeeController
         UserRole userRole=userRoleService.findUserRole(employeemodule.getUserroleId());
         System.out.println(userRole);
         employee.setUserRole(userRole);
+        return employeeService.saveEmployee(employee);
+    }
+
+    public Employee updatePasswordByID(Employeemodule employeemodule)
+    {
+        Employee employee=employeeService.findEmployee(employeemodule.getId());
+        employee.setPassword(employeemodule.getPassword());
         return employeeService.saveEmployee(employee);
     }
 }

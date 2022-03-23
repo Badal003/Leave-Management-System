@@ -1,6 +1,7 @@
 package com.example.tmpproject.model;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,14 @@ public class LeaveApply
     @Column(name = "LA_ID")
     private int leaveapplyId;
     @Column(name = "FROM_DATE")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date fromDate;
     @Column(name = "TO_DATE")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date toDate;
+    @Column(name="APPLY_DATE")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private Date applydate;
     @Column(name = "STATUS")
     private int status;
     //private int leavetypeId;
