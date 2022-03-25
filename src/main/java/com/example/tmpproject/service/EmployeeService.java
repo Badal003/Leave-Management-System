@@ -20,4 +20,6 @@ public class EmployeeService
     public Employee deleteEmployee(int id){return employeeRepositry.deleteById(id);}
     public Long count(){return employeeRepositry.count();}
     public List<Employee> findEmployeeByDepartment(Department department){return employeeRepositry.findByDepartment(department);}
+    public Employee findEmployeeByEmailandPassword(String email,String password){return employeeRepositry.findByEmailIdAndPassword(email,password);}
+    public Employee findEmployeeByEmail(String email){return employeeRepositry.findByEmailId(email);}
 }

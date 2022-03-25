@@ -40,7 +40,13 @@ public class EmployeeController
         employee.setLastName(employeemodule.getLastName());
         employee.setGender(employeemodule.getGender());
         employee.setEmailId(employeemodule.getEmailId());
-        employee.setPassword(GeneratePassword.generateRandomPassword());
+        String password=GeneratePassword.generateRandomPassword();
+        String subject="Welcome to LMS";
+        String text="Hi" +employee.getFirstName()+
+                "your password"+password;
+        Mail m=new Mail();
+        m.sendMail(employeemodule.getEmailId(),subject,text);
+        employee.setPassword(password);
         employee.setMobileNumber(employeemodule.getMobileNumber());
         employee.setDateOfBirth(employeemodule.getDateOfBirth());
         employee.setDateOfJoin(employeemodule.getDateOfJoin());
@@ -124,17 +130,60 @@ public class EmployeeController
     {
         System.out.println(employeemodule);
         Employee employee=employeeService.findEmployee(employeemodule.getId());
-        System.out.println(employee);
         UserRole userRole=userRoleService.findUserRole(employeemodule.getUserroleId());
-        System.out.println(userRole);
         employee.setUserRole(userRole);
         return employeeService.saveEmployee(employee);
     }
 
-    public Employee updatePasswordByID(Employeemodule employeemodule)
+
+    @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Employeemodule employeeLogin(@RequestBody Employeemodule employeemodule)
+    {
+        Employeemodule employeemodule1=new Employeemodule();
+        System.out.println(employeemodule);
+        System.out.println(employeemodule.getEmailId()+" "+employeemodule.getPassword());
+        Employee employee=employeeService.findEmployeeByEmailandPassword(employeemodule.getEmailId(),employeemodule.getPassword());
+        System.out.println(employee);
+        employeemodule1.setId(employee.getEmployeeId());
+        employeemodule1.setFirstName(employee.getFirstName());
+        employeemodule1.setMiddleName(employee.getMiddleName());
+        employeemodule1.setLastName(employee.getLastName());
+        employeemodule1.setGender(employee.getGender());
+        employeemodule1.setEmailId(employee.getEmailId());
+        employeemodule1.setPassword(GeneratePassword.generateRandomPassword());
+        employeemodule1.setMobileNumber(employee.getMobileNumber());
+        employeemodule1.setDateOfBirth(employee.getDateOfBirth());
+        employeemodule1.setDateOfJoin(employee.getDateOfJoin());
+        Designation designation=employee.getDesignation();
+        Department department=employee.getDepartment();
+        UserRole userRole=employee.getUserRole();
+        employeemodule1.setDepartmentId(department.getDepartmentId());
+        employeemodule1.setDesignationId(designation.getDesignationId());
+        employeemodule1.setUserroleId(userRole.getUserroleId());
+        return employeemodule1;
+    }
+    @PostMapping("/updatepassword")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Employee updatePassword(@RequestBody Employeemodule employeemodule)
     {
         Employee employee=employeeService.findEmployee(employeemodule.getId());
         employee.setPassword(employeemodule.getPassword());
+        return employeeService.saveEmployee(employee);
+    }
+
+    @PostMapping("/forgetpassword")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Employee forgetPassword(@RequestBody Employeemodule employeemodule)
+    {
+        Employee employee=employeeService.findEmployeeByEmail(employeemodule.getEmailId());
+        String password=GeneratePassword.generateRandomPassword();
+        String subject="New Generate Password from LMS";
+        String text="Hi" +employee.getFirstName()+
+                "New password"+password;
+        Mail m=new Mail();
+        m.sendMail(employee.getEmailId(),subject,text);
+        employee.setPassword(password);
         return employeeService.saveEmployee(employee);
     }
 }

@@ -14,4 +14,7 @@ public interface EmployeeRepositry extends JpaRepository<Employee,Integer>
     public List<Employee> findAllBy();
     public Employee deleteById(int emp_id);
     public List<Employee> findByDepartment(Department department);
+    public Employee findByEmailIdAndPassword(String emailid,String password);
+    public Employee findByEmailId(String emailid);
+
 }
