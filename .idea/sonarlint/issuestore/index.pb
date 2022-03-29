@@ -7,8 +7,6 @@ y
 Isrc/main/java/com/example/tmpproject/repository/DesignationRepositry.java,f/2/f27683ba241914b3ed6f134ec56bfe221ebe8c4f
 t
 Dsrc/main/java/com/example/tmpproject/service/DesignationService.java,5/6/5650549a6d725bed2b10addbb17c9cfd3a6567e8
-w
-Gsrc/main/java/com/example/tmpproject/controller/UserRoleController.java,8/7/87ec62bc6ccd7a6169a9c4f9bbbff279cfdf4c7c
 z
 Jsrc/main/java/com/example/tmpproject/controller/DesignationController.java,3/9/39e009ff8eee7a5262fd688e89bdd5c72dfe3873
 h
@@ -25,8 +23,6 @@ u
 Esrc/main/java/com/example/tmpproject/controller/GeneratePassword.java,6/b/6b9b3fb7fa6cb0ad2251f7a0f87ff35b1a478455
 y
 Isrc/main/java/com/example/tmpproject/controller/DepartmentController.java,9/0/90e8b264ec32cf05028709f6002f66a2db318c71
-o
-?src/main/java/com/example/tmpproject/TmpprojectApplication.java,e/1/e1263c6af656457577a1dfe276bc9faba31d8701
 s
 Csrc/main/java/com/example/tmpproject/service/DepartmentService.java,d/8/d8fe72f9de52ba0294155746b807b5caa50ecbae
 r
@@ -37,9 +33,9 @@ w
 Gsrc/main/java/com/example/tmpproject/repository/LeaveTypeRepositry.java,5/7/57642cc4c60499ed0c20681fb8cd62c6abcee615
 p
 @src/main/java/com/example/tmpproject/controller/CurrentDate.java,1/e/1eeab1879e04fb98623d40bec70ae1989e22350c
-j
-:src/main/java/com/example/tmpproject/model/LeaveApply.java,2/5/253fc75838ca7234c62a6fe5a2cfc01ab5cffc47
-x
-Hsrc/main/java/com/example/tmpproject/controller/LeaveTypeController.java,c/f/cfaac0ee5ee8784f6ec6b93067b1429a310b03ba
 q
 Asrc/main/java/com/example/tmpproject/service/UserRoleService.java,b/e/be5cf450d621181e11744b381cf7e07f0a753bb0
+t
+Dsrc/test/java/com/example/tmpproject/TmpprojectApplicationTests.java,4/a/4aa90ad1603e0c5f6711408b302e9a7253773606
+o
+?src/main/java/com/example/tmpproject/TmpprojectApplication.java,e/1/e1263c6af656457577a1dfe276bc9faba31d8701

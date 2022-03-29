@@ -1,5 +1,6 @@
 package com.example.tmpproject.service;
 
+import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.LeaveApply;
 import com.example.tmpproject.repository.LeaveRepositry;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ public class LeaveService
 {
     @Autowired
     private LeaveRepositry leaveRepositry;
-
     public LeaveApply saveLeave(LeaveApply leaveApply){return leaveRepositry.save(leaveApply);}
     public LeaveApply findLeave(int id){return leaveRepositry.findById(id);}
     public List<LeaveApply> findAllLeave(){return leaveRepositry.findAllBy();}
+    public List<LeaveApply> findByEmployee(Employee employee){return leaveRepositry.findAllByEmployee(employee);}
 }

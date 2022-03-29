@@ -1,5 +1,6 @@
 package com.example.tmpproject.repository;
 
+import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.LeaveApply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,4 +12,5 @@ public interface LeaveRepositry extends JpaRepository<LeaveApply,Integer>
 {
     public LeaveApply findById(int lt_id);
     public List<LeaveApply> findAllBy();
+    public List<LeaveApply> findAllByEmployee(Employee employee);
 }

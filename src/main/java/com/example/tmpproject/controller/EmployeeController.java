@@ -5,10 +5,7 @@ import com.example.tmpproject.model.Department;
 import com.example.tmpproject.model.Designation;
 import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.UserRole;
-import com.example.tmpproject.service.DepartmentService;
-import com.example.tmpproject.service.DesignationService;
-import com.example.tmpproject.service.EmployeeService;
-import com.example.tmpproject.service.UserRoleService;
+import com.example.tmpproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,10 +29,12 @@ public class EmployeeController
     @Autowired
     private UserRoleService userRoleService;
 
+
+
+
     @PostMapping("/addemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Employee AddEmployee(@RequestBody Employeemodule employeemodule)
-    {
+    public Employee AddEmployee(@RequestBody Employeemodule employeemodule) throws MessagingException, IOException {
         Employee employee=new Employee();
         employee.setFirstName(employeemodule.getFirstName());
         employee.setMiddleName(employeemodule.getMiddleName());
@@ -44,8 +45,7 @@ public class EmployeeController
         String subject="Welcome to LMS";
         String text="Hi" +employee.getFirstName()+
                 "your password"+password;
-        Mail m=new Mail();
-        m.sendMail(employeemodule.getEmailId(),subject,text);
+
         employee.setPassword(password);
         employee.setMobileNumber(employeemodule.getMobileNumber());
         employee.setDateOfBirth(employeemodule.getDateOfBirth());
@@ -108,7 +108,8 @@ public class EmployeeController
     @CrossOrigin(origins = "http://localhost:4200")
     public Employee DeleteEmployee(@RequestBody Employee employee)
     {
-        Employee employee1=employeeService.findEmployee(employee.getEmployeeId());
+        Employee employee1=new Employee();
+        employee1=employeeService.findEmployee(employee.getEmployeeId());
         employee1.setDepartment(null);
         employee1.setDesignation(null);
         employee1.setUserRole(null);
@@ -174,15 +175,13 @@ public class EmployeeController
 
     @PostMapping("/forgetpassword")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Employee forgetPassword(@RequestBody Employeemodule employeemodule)
-    {
+    public Employee forgetPassword(@RequestBody Employeemodule employeemodule) throws MessagingException {
         Employee employee=employeeService.findEmployeeByEmail(employeemodule.getEmailId());
         String password=GeneratePassword.generateRandomPassword();
         String subject="New Generate Password from LMS";
         String text="Hi" +employee.getFirstName()+
                 "New password"+password;
-        Mail m=new Mail();
-        m.sendMail(employee.getEmailId(),subject,text);
+
         employee.setPassword(password);
         return employeeService.saveEmployee(employee);
     }

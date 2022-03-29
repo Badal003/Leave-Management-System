@@ -2,6 +2,7 @@ package com.example.tmpproject.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,21 +23,26 @@ public class LeaveApply
     private int leaveapplyId;
     @Column(name = "FROM_DATE")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date fromDate;
     @Column(name = "TO_DATE")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date toDate;
     @Column(name="APPLY_DATE")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date applydate;
     @Column(name = "STATUS")
     private int status;
     //private int leavetypeId;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "LT_ID")
+    @JoinColumn(name = "LT_ID",referencedColumnName = "LT_ID")
     private LeaveType leaveType;
     //private int employeeId;
-    @ManyToOne
-    @JoinColumn(name = "EMP_ID")
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "EMP_ID",referencedColumnName = "EMP_ID")
     private Employee employee;
 }
