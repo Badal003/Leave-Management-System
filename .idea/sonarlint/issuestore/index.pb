@@ -17,8 +17,6 @@ j
 :src/main/java/com/example/tmpproject/model/Department.java,1/2/128d22d05a1dabe5c531ad00e9b081fe8898f435
 n
 >src/main/java/com/example/tmpproject/model/RoleAllocation.java,f/7/f73e4613de7310efa4cca0019307e1ffecb64ba8
-x
-Hsrc/main/java/com/example/tmpproject/repository/DepartmentRepositry.java,4/d/4df740c4736fd20315265e7cf49d5f2d17f2ad33
 u
 Esrc/main/java/com/example/tmpproject/controller/GeneratePassword.java,6/b/6b9b3fb7fa6cb0ad2251f7a0f87ff35b1a478455
 y

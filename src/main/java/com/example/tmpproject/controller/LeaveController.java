@@ -1,6 +1,7 @@
 package com.example.tmpproject.controller;
 
 import com.example.tmpproject.Module.Leavemodule;
+import com.example.tmpproject.Module.TempLeave;
 import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.LeaveApply;
 import com.example.tmpproject.model.LeaveType;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -74,12 +76,40 @@ public class LeaveController
     }
     @PostMapping("/leaveofemployee")
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<LeaveApply> findLeaveByEmployee(@RequestBody Leavemodule leavemodule)
+    public List<TempLeave> findLeaveByEmployee(@RequestBody Leavemodule leavemodule)
     {
-        System.out.print(leavemodule.getEmployeeId());
+        List<LeaveApply> leaveApplies=new ArrayList<>();
+        List<TempLeave> tempLeaveList=new ArrayList<>();
         Employee employee=employeeService.findEmployee(leavemodule.getEmployeeId());
-        System.out.print(employee);
-        return leaveService.findByEmployee(employee);
+        LeaveType leaveType=new LeaveType();
+        leaveApplies= leaveService.findByEmployee(employee);
+        for(LeaveApply e:leaveApplies)
+        {
+            TempLeave tempLeave=new TempLeave();
+            tempLeave.setLeaveapplyId(e.getLeaveapplyId());
+            tempLeave.setFromDate(e.getFromDate());
+            tempLeave.setToDate(e.getToDate());
+            tempLeave.setApplydate(e.getApplydate());
+            tempLeave.setStatus(e.getStatus());
+            employee=e.getEmployee();
+            String name=employee.getFirstName()+" "+employee.getLastName();
+            tempLeave.setEmployeeName(name);
+            leaveType=e.getLeaveType();
+            tempLeave.setLeaveName(leaveType.getLeaveName());
+            tempLeaveList.add(tempLeave);
+        }
+        return tempLeaveList;
     }
+
+//    public List<TempLeave> findEmployeeLeaveByDepartment(Leavemodule leavemodule)
+//    {
+//        List<LeaveApply> leaveApplies=new ArrayList<>();
+//        List<TempLeave> tempLeaveList=new ArrayList<>();
+//        Employee employee=employeeService.findEmployee(leavemodule.getEmployeeId());
+//        LeaveType leaveType=new LeaveType();
+//        leaveApplies= leaveService.findByEmployee(employee);
+//
+//        return tempLeaveList;
+//    }
 
 }
