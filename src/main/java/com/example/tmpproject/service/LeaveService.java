@@ -1,5 +1,6 @@
 package com.example.tmpproject.service;
 
+import com.example.tmpproject.model.Department;
 import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.LeaveApply;
 import com.example.tmpproject.repository.LeaveRepositry;
@@ -17,4 +18,7 @@ public class LeaveService
     public LeaveApply findLeave(int id){return leaveRepositry.findById(id);}
     public List<LeaveApply> findAllLeave(){return leaveRepositry.findAllBy();}
     public List<LeaveApply> findByEmployee(Employee employee){return leaveRepositry.findAllByEmployee(employee);}
+    public List<LeaveApply>findEmployeeLeaveByDepartment(int dept_id){return leaveRepositry.findEmployeeLeaveByDepartment(dept_id);}
+    public List<LeaveApply> findLeaveByDepartment(int status,int dept_id){return  leaveRepositry.findLeaveByDepartment(status,dept_id);}
+    public long countBystatus(int s){return  leaveRepositry.countBystatus(s);}
 }

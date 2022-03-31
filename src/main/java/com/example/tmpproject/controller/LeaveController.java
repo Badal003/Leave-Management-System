@@ -2,13 +2,16 @@ package com.example.tmpproject.controller;
 
 import com.example.tmpproject.Module.Leavemodule;
 import com.example.tmpproject.Module.TempLeave;
+import com.example.tmpproject.model.Department;
 import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.LeaveApply;
 import com.example.tmpproject.model.LeaveType;
+import com.example.tmpproject.service.DepartmentService;
 import com.example.tmpproject.service.EmployeeService;
 import com.example.tmpproject.service.LeaveService;
 import com.example.tmpproject.service.LeaveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +29,8 @@ public class LeaveController
     private EmployeeService employeeService;
     @Autowired
     private LeaveTypeService leaveTypeService;
+    @Autowired
+    private DepartmentService departmentService;
 
     //employee can apply a leave
     @PostMapping("/addleave")
@@ -100,16 +105,28 @@ public class LeaveController
         }
         return tempLeaveList;
     }
-
-//    public List<TempLeave> findEmployeeLeaveByDepartment(Leavemodule leavemodule)
-//    {
-//        List<LeaveApply> leaveApplies=new ArrayList<>();
-//        List<TempLeave> tempLeaveList=new ArrayList<>();
-//        Employee employee=employeeService.findEmployee(leavemodule.getEmployeeId());
-//        LeaveType leaveType=new LeaveType();
-//        leaveApplies= leaveService.findByEmployee(employee);
-//
-//        return tempLeaveList;
-//    }
-
+    @PostMapping("/findemployeeleavebydepartment")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<LeaveApply>findEmployeeLeaveByDepartment(@RequestBody Employee employee)
+    {
+        Employee employee1=new Employee();
+        employee1=employeeService.findEmployee(employee.getEmployeeId());
+        Department department=employee1.getDepartment();
+        return leaveService.findEmployeeLeaveByDepartment(department.getDepartmentId());
+    }
+    @PostMapping("/findleavebydepartment")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<LeaveApply> findLeaveByDepartment(@RequestBody Leavemodule leavemodule)
+    {
+        Employee employee1=new Employee();
+        employee1=employeeService.findEmployee(leavemodule.getEmployeeId());
+        Department department=employee1.getDepartment();
+        return leaveService.findLeaveByDepartment(1,department.getDepartmentId());
+    }
+    @PostMapping("/countpendingleave")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public long countBystatus(@RequestBody Leavemodule leavemodule)
+    {
+        return leaveService.countBystatus(leavemodule.getStatus());
+    }
 }

@@ -25,8 +25,6 @@ s
 Csrc/main/java/com/example/tmpproject/service/DepartmentService.java,d/8/d8fe72f9de52ba0294155746b807b5caa50ecbae
 r
 Bsrc/main/java/com/example/tmpproject/service/LeaveTypeService.java,5/7/57663be299a2256b2db642342b00d4712ae0aca3
-i
-9src/main/java/com/example/tmpproject/model/LeaveType.java,4/8/481ca85bf1eb969883bfd9e2654d1510e488e09a
 w
 Gsrc/main/java/com/example/tmpproject/repository/LeaveTypeRepositry.java,5/7/57642cc4c60499ed0c20681fb8cd62c6abcee615
 p
@@ -35,5 +33,5 @@ q
 Asrc/main/java/com/example/tmpproject/service/UserRoleService.java,b/e/be5cf450d621181e11744b381cf7e07f0a753bb0
 t
 Dsrc/test/java/com/example/tmpproject/TmpprojectApplicationTests.java,4/a/4aa90ad1603e0c5f6711408b302e9a7253773606
-o
-?src/main/java/com/example/tmpproject/TmpprojectApplication.java,e/1/e1263c6af656457577a1dfe276bc9faba31d8701
+w
+Gsrc/main/java/com/example/tmpproject/controller/EmployeeController.java,f/e/fe39df2a7ecd764cdc5bf3a1a87cfb6b47e62321
