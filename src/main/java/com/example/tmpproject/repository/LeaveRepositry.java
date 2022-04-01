@@ -20,6 +20,6 @@ public interface LeaveRepositry extends JpaRepository<LeaveApply,Integer>
     public List<LeaveApply> findEmployeeLeaveByDepartment(int dept_id);
     @Query(value = " select * from leave_apply where status=:status and leave_apply.emp_id IN(select emp_id from employee where dept_id=:dept_id);",nativeQuery = true)
     public List<LeaveApply> findLeaveByDepartment(int status,int dept_id);
-
-    public long countBystatus(int s);
+    @Query(value = "select count(*) from leave_apply where status=:status and leave_apply.emp_id IN(select emp_id from employee where dept_id=:dept_id);",nativeQuery = true)
+    public long countBystatus(int status,int dept_id);
 }

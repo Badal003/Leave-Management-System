@@ -52,11 +52,12 @@ public class LeaveController
     {
         return leaveService.findAllLeave();
     }
+
     @PostMapping("/findleave")
     @CrossOrigin(origins = "http://localhost:4200")
     public Leavemodule findLeaveByID(@RequestBody Leavemodule leavemodule)
     {
-        Leavemodule leavemodule1=null;
+        Leavemodule leavemodule1=new Leavemodule();
         LeaveApply leaveApply=leaveService.findLeave(leavemodule.getLeaveapplyId());
         leavemodule1.setLeaveapplyId(leaveApply.getLeaveapplyId());
         leavemodule1.setApplydate(leaveApply.getApplydate());
@@ -107,26 +108,89 @@ public class LeaveController
     }
     @PostMapping("/findemployeeleavebydepartment")
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<LeaveApply>findEmployeeLeaveByDepartment(@RequestBody Employee employee)
+    public List<TempLeave>findEmployeeLeaveByDepartment(@RequestBody Employee employee)
     {
         Employee employee1=new Employee();
+        List<LeaveApply> leaveApplies=new ArrayList<>();
+        List<TempLeave> tempLeaveList=new ArrayList<>();
+        LeaveType leaveType=new LeaveType();
         employee1=employeeService.findEmployee(employee.getEmployeeId());
         Department department=employee1.getDepartment();
-        return leaveService.findEmployeeLeaveByDepartment(department.getDepartmentId());
+        leaveApplies =leaveService.findEmployeeLeaveByDepartment(department.getDepartmentId());
+        for(LeaveApply e:leaveApplies)
+        {
+            TempLeave tempLeave=new TempLeave();
+            tempLeave.setLeaveapplyId(e.getLeaveapplyId());
+            tempLeave.setFromDate(e.getFromDate());
+            tempLeave.setToDate(e.getToDate());
+            tempLeave.setApplydate(e.getApplydate());
+            tempLeave.setStatus(e.getStatus());
+            employee=e.getEmployee();
+            String name=employee.getFirstName()+" "+employee.getLastName();
+            tempLeave.setEmployeeName(name);
+            leaveType=e.getLeaveType();
+            tempLeave.setLeaveName(leaveType.getLeaveName());
+            tempLeaveList.add(tempLeave);
+        }
+        return tempLeaveList;
     }
     @PostMapping("/findleavebydepartment")
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<LeaveApply> findLeaveByDepartment(@RequestBody Leavemodule leavemodule)
+    public List<TempLeave> findLeaveByDepartment(@RequestBody Leavemodule leavemodule)
     {
+        List<LeaveApply> leaveApplies=new ArrayList<>();
+        List<TempLeave> tempLeaveList=new ArrayList<>();
+        LeaveType leaveType=new LeaveType();
         Employee employee1=new Employee();
         employee1=employeeService.findEmployee(leavemodule.getEmployeeId());
         Department department=employee1.getDepartment();
-        return leaveService.findLeaveByDepartment(1,department.getDepartmentId());
+        leaveApplies=leaveService.findLeaveByDepartment(leavemodule.getStatus(),department.getDepartmentId());
+        for(LeaveApply e:leaveApplies)
+        {
+            TempLeave tempLeave=new TempLeave();
+            tempLeave.setLeaveapplyId(e.getLeaveapplyId());
+            tempLeave.setFromDate(e.getFromDate());
+            tempLeave.setToDate(e.getToDate());
+            tempLeave.setApplydate(e.getApplydate());
+            tempLeave.setStatus(e.getStatus());
+            employee1=e.getEmployee();
+            String name=employee1.getFirstName()+" "+employee1.getLastName();
+            tempLeave.setEmployeeName(name);
+            leaveType=e.getLeaveType();
+            tempLeave.setLeaveName(leaveType.getLeaveName());
+            tempLeaveList.add(tempLeave);
+        }
+        return tempLeaveList;
     }
+
+    @PostMapping("/findleavebyid")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public TempLeave findByID(@RequestBody Leavemodule leavemodule)
+    {
+        TempLeave tempLeave=new TempLeave();
+        LeaveType leaveType=new LeaveType();
+        LeaveApply leaveApply=leaveService.findLeave(leavemodule.getLeaveapplyId());
+        tempLeave.setLeaveapplyId(leaveApply.getLeaveapplyId());
+        tempLeave.setApplydate(leaveApply.getApplydate());
+        tempLeave.setFromDate(leaveApply.getFromDate());
+        tempLeave.setToDate(leaveApply.getToDate());
+        tempLeave.setStatus(leaveApply.getStatus());
+        Employee employee=leaveApply.getEmployee();
+        String name=employee.getFirstName()+" "+employee.getLastName();
+        tempLeave.setEmployeeName(name);
+        leaveType=leaveApply.getLeaveType();
+        tempLeave.setLeaveName(leaveType.getLeaveName());
+        System.out.println(tempLeave);
+        return tempLeave;
+    }
+
     @PostMapping("/countpendingleave")
     @CrossOrigin(origins = "http://localhost:4200")
     public long countBystatus(@RequestBody Leavemodule leavemodule)
     {
-        return leaveService.countBystatus(leavemodule.getStatus());
+        Employee employee1=new Employee();
+        employee1=employeeService.findEmployee(leavemodule.getEmployeeId());
+        Department department=employee1.getDepartment();
+        return leaveService.countBystatus(leavemodule.getStatus(),department.getDepartmentId());
     }
 }

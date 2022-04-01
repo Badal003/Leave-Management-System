@@ -23,10 +23,6 @@ y
 Isrc/main/java/com/example/tmpproject/controller/DepartmentController.java,9/0/90e8b264ec32cf05028709f6002f66a2db318c71
 s
 Csrc/main/java/com/example/tmpproject/service/DepartmentService.java,d/8/d8fe72f9de52ba0294155746b807b5caa50ecbae
-r
-Bsrc/main/java/com/example/tmpproject/service/LeaveTypeService.java,5/7/57663be299a2256b2db642342b00d4712ae0aca3
-w
-Gsrc/main/java/com/example/tmpproject/repository/LeaveTypeRepositry.java,5/7/57642cc4c60499ed0c20681fb8cd62c6abcee615
 p
 @src/main/java/com/example/tmpproject/controller/CurrentDate.java,1/e/1eeab1879e04fb98623d40bec70ae1989e22350c
 q
@@ -35,3 +31,7 @@ t
 Dsrc/test/java/com/example/tmpproject/TmpprojectApplicationTests.java,4/a/4aa90ad1603e0c5f6711408b302e9a7253773606
 w
 Gsrc/main/java/com/example/tmpproject/controller/EmployeeController.java,f/e/fe39df2a7ecd764cdc5bf3a1a87cfb6b47e62321
+v
+Fsrc/main/java/com/example/tmpproject/repository/EmployeeRepositry.java,7/3/73debda78e69fc761f35b12a70a8062985a0a90b
+x
+Hsrc/main/java/com/example/tmpproject/repository/DepartmentRepositry.java,4/d/4df740c4736fd20315265e7cf49d5f2d17f2ad33
