@@ -45,9 +45,10 @@ public class EmployeeController
         employee.setEmailId(employeemodule.getEmailId());
         String password=GeneratePassword.generateRandomPassword();
         String subject="Welcome to LMS";
-        String text="Hi" +employee.getFirstName()+
-                "your password"+password;
-
+        String text="Hi  " +employee.getFirstName()+
+                "your password "+password;
+        emailService.sendMail(employeemodule.getEmailId(),subject,text);
+        employee.setPassword(password);
         employee.setPassword(password);
         employee.setMobileNumber(employeemodule.getMobileNumber());
         employee.setDateOfBirth(employeemodule.getDateOfBirth());
@@ -181,8 +182,10 @@ public class EmployeeController
         Employee employee=employeeService.findEmployeeByEmail(employeemodule.getEmailId());
         String password=GeneratePassword.generateRandomPassword();
         String subject="New Generate Password from LMS";
-        String text="Hi" +employee.getFirstName()+
-                "New password"+password;
+        String text="Hi "+employee.getFirstName()
+                +"\n      Welcome to LMS."
+                +"\n To make reservations, you will need a login for Schedule Master. Please use the links below to  your password and then go to the login page using the following account information:\n username: "+employee.getEmailId() +"\n" +
+                "Password:"+ password+"\n   Thanks,  \nbypt Leave Management System";
         emailService.sendMail(employeemodule.getEmailId(),subject,text);
         employee.setPassword(password);
         return employeeService.saveEmployee(employee);
