@@ -28,6 +28,8 @@ public class EmployeeController
     private DesignationService designationService;
     @Autowired
     private UserRoleService userRoleService;
+    @Autowired
+    private EmailService emailService;
 
 
 
@@ -181,7 +183,7 @@ public class EmployeeController
         String subject="New Generate Password from LMS";
         String text="Hi" +employee.getFirstName()+
                 "New password"+password;
-
+        emailService.sendMail(employeemodule.getEmailId(),subject,text);
         employee.setPassword(password);
         return employeeService.saveEmployee(employee);
     }
