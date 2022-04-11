@@ -12,8 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "LEAVE_TYPE")
-public class LeaveType
-{
+public class LeaveType {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)

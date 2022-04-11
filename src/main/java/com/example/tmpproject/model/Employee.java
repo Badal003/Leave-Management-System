@@ -16,8 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "EMPLOYEE")
-public class Employee
-{
+public class Employee {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)

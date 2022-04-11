@@ -14,8 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "DEPARTMENT")
-public class Department
-{
+public class Department {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +24,6 @@ public class Department
     private String departmentShortName;
     @Column(unique = true, nullable = false,name = "FULLNAME")
     private String departmentFullName;
-
-
-
 }
 
 

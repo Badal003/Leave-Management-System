@@ -14,5 +14,5 @@ public class Leavemodule
     private int status;
     private int leavetypeId;
     private int employeeId;
-
+    private int managerId;
 }

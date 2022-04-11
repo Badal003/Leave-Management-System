@@ -13,4 +13,5 @@ public class TempLeave {
     private int status;
     private String leaveName;
     private String employeeName;
+    private String managerName;
 }

@@ -36,13 +36,21 @@ public class LeaveApply
     @Column(name = "STATUS")
     private int status;
     //private int leavetypeId;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "LT_ID",referencedColumnName = "LT_ID")
     private LeaveType leaveType;
     //private int employeeId;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "EMP_ID",referencedColumnName = "EMP_ID")
     private Employee employee;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "MGR_ID",referencedColumnName = "MGR_ID")
+    private Employee manager;
+
 }

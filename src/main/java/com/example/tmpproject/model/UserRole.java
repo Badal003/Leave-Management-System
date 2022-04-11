@@ -15,8 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "USER_ROLE")
-public class UserRole
-{
+public class UserRole{
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)

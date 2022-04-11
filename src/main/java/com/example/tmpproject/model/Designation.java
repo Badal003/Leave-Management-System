@@ -14,8 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "DESIGNATION")
-public class Designation
-{
+public class Designation {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
