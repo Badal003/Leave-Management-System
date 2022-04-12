@@ -12,6 +12,8 @@ public class Leavemodule
     private Date toDate;
     private Date applydate;
     private int status;
+    private Date remarkdate;
+    private String remark;
     private int leavetypeId;
     private int employeeId;
     private int managerId;

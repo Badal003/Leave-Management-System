@@ -1,0 +1,8 @@
+
+Q	java:S1250"<This block of commented-out lines of code should be removed.(¯Í˜ 
+V	java:S1255"<This block of commented-out lines of code should be removed.(Œ´ÁÔúÿÿÿÿ
+Q	java:S125:"<This block of commented-out lines of code should be removed.(Ö á
+j
+java:S1128"ORemove this unused import 'com.fasterxml.jackson.annotation.JsonBackReference'.(»Ôœ¿ıÿÿÿÿ
+P
+java:S1191"5Use classes from the Java API instead of Sun classes.(‡œ£ÿÿÿÿÿ

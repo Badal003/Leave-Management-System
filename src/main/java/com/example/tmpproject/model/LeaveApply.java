@@ -21,21 +21,33 @@ public class LeaveApply
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "LA_ID")
     private int leaveapplyId;
+
     @Column(name = "FROM_DATE")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date fromDate;
+
     @Column(name = "TO_DATE")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date toDate;
+
     @Column(name="APPLY_DATE")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date applydate;
+
+    @Column(name="REMARK_DATE")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date remarkdate;
+
     @Column(name = "STATUS")
     private int status;
     //private int leavetypeId;
+
+    @Column(name = "REMARK")
+    private String remark;
 
     @JsonIgnore
     @ManyToOne
@@ -50,7 +62,7 @@ public class LeaveApply
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "MGR_ID",referencedColumnName = "MGR_ID")
+    @JoinColumn(name = "MGR_ID",referencedColumnName = "EMP_ID")
     private Employee manager;
 
 }

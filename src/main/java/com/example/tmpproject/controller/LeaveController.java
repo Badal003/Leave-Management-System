@@ -45,6 +45,8 @@ public class LeaveController
         leaveApply.setEmployee(employeeService.findEmployee(leavemodule.getEmployeeId()));
         leaveApply.setLeaveType(leaveTypeService.findLeaveType(leavemodule.getLeavetypeId()));
         leaveApply.setManager(null);
+        leaveApply.setRemark(null);
+        leaveApply.setRemark(null);
         return leaveService.saveLeave(leaveApply);
     }
     @PostMapping("/findallleave")
@@ -54,34 +56,36 @@ public class LeaveController
         return leaveService.findAllLeave();
     }
 
-    @PostMapping("/findleave")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public Leavemodule findLeaveByID(@RequestBody Leavemodule leavemodule)
-    {
-        Leavemodule leavemodule1=new Leavemodule();
-        LeaveApply leaveApply=leaveService.findLeave(leavemodule.getLeaveapplyId());
-        leavemodule1.setLeaveapplyId(leaveApply.getLeaveapplyId());
-        leavemodule1.setApplydate(leaveApply.getApplydate());
-        leavemodule1.setFromDate(leaveApply.getFromDate());
-        leavemodule1.setToDate(leaveApply.getToDate());
-        leavemodule1.setStatus(leaveApply.getStatus());
-        Employee employee=leaveApply.getEmployee();
-        leavemodule1.setEmployeeId(employee.getEmployeeId());
-        LeaveType leaveType=leaveApply.getLeaveType();
-        leavemodule1.setLeavetypeId(leaveType.getLeavetypeId());
-        Employee manager=leaveApply.getManager();
-        leavemodule1.setManagerId(manager.getEmployeeId());
-        return leavemodule1;
-    }
+//    @PostMapping("/findleave")
+//    @CrossOrigin(origins = "http://localhost:4200")
+//    public Leavemodule findLeaveByID(@RequestBody Leavemodule leavemodule)
+//    {
+//        Leavemodule leavemodule1=new Leavemodule();
+//        LeaveApply leaveApply=leaveService.findLeave(leavemodule.getLeaveapplyId());
+//        leavemodule1.setLeaveapplyId(leaveApply.getLeaveapplyId());
+//        leavemodule1.setApplydate(leaveApply.getApplydate());
+//        leavemodule1.setFromDate(leaveApply.getFromDate());
+//        leavemodule1.setToDate(leaveApply.getToDate());
+//        leavemodule1.setStatus(leaveApply.getStatus());
+//        Employee employee=leaveApply.getEmployee();
+//        leavemodule1.setEmployeeId(employee.getEmployeeId());
+//        LeaveType leaveType=leaveApply.getLeaveType();
+//        leavemodule1.setLeavetypeId(leaveType.getLeavetypeId());
+//        return leavemodule1;
+//    }
     //Hr or manager can Approved or not Approved
     @PostMapping("/applyleave")
     @CrossOrigin(origins = "http://localhost:4200")
     public LeaveApply updateLeaveStatusById(@RequestBody Leavemodule leavemodule)
     {
+        System.out.println(leavemodule);
         LeaveApply leaveApply=null;
         leaveApply=leaveService.findLeave(leavemodule.getLeaveapplyId());
         leaveApply.setStatus(leavemodule.getStatus());
-        leaveApply.setManager(employeeService.findEmployee(leavemodule.getEmployeeId()));
+        leaveApply.setManager(employeeService.findEmployee(leavemodule.getManagerId()));
+        leaveApply.setRemark(leavemodule.getRemark());
+        leaveApply.setRemarkdate(CurrentDate.findCurrentDate());
+        System.out.println(leaveApply);
         return leaveService.saveLeave(leaveApply);
     }
     @PostMapping("/leaveofemployee")
@@ -106,9 +110,14 @@ public class LeaveController
             tempLeave.setEmployeeName(name);
             leaveType=e.getLeaveType();
             tempLeave.setLeaveName(leaveType.getLeaveName());
-            employee=e.getManager();
-            String mname=employee.getFirstName()+" "+employee.getLastName();
-            tempLeave.setManagerName(mname);
+            if(e.getStatus()!=0)
+            {
+                employee=e.getManager();
+                String mname=employee.getFirstName()+" "+employee.getLastName();
+                tempLeave.setManagerName(mname);
+                tempLeave.setRemarkdate(e.getRemarkdate());
+                tempLeave.setRemark(e.getRemark());
+            }
             tempLeaveList.add(tempLeave);
         }
         return tempLeaveList;
@@ -137,9 +146,14 @@ public class LeaveController
             tempLeave.setEmployeeName(name);
             leaveType=e.getLeaveType();
             tempLeave.setLeaveName(leaveType.getLeaveName());
-            employee=e.getManager();
-            String mname=employee.getFirstName()+" "+employee.getLastName();
-            tempLeave.setManagerName(mname);
+            if(e.getStatus()!=0)
+            {
+                employee1=e.getManager();
+                String mname=employee1.getFirstName()+" "+employee1.getLastName();
+                tempLeave.setManagerName(mname);
+                tempLeave.setRemarkdate(e.getRemarkdate());
+                tempLeave.setRemark(e.getRemark());
+            }
             tempLeaveList.add(tempLeave);
         }
         return tempLeaveList;
@@ -167,9 +181,14 @@ public class LeaveController
             tempLeave.setEmployeeName(name);
             leaveType=e.getLeaveType();
             tempLeave.setLeaveName(leaveType.getLeaveName());
-            employee1=e.getManager();
-            String mname=employee1.getFirstName()+" "+employee1.getLastName();
-            tempLeave.setManagerName(mname);
+            if(e.getStatus()!=0)
+            {
+                employee1=e.getManager();
+                String mname=employee1.getFirstName()+" "+employee1.getLastName();
+                tempLeave.setManagerName(mname);
+                tempLeave.setRemarkdate(e.getRemarkdate());
+                tempLeave.setRemark(e.getRemark());
+            }
             tempLeaveList.add(tempLeave);
         }
         return tempLeaveList;
@@ -192,10 +211,15 @@ public class LeaveController
         tempLeave.setEmployeeName(name);
         leaveType=leaveApply.getLeaveType();
         tempLeave.setLeaveName(leaveType.getLeaveName());
-        employee=leaveApply.getManager();
-        String mname=employee.getFirstName()+" "+employee.getLastName();
-        tempLeave.setManagerName(mname);
-        System.out.println(tempLeave);
+        if(leaveApply.getStatus()!=0)
+        {
+            employee=leaveApply.getManager();
+            String mname=employee.getFirstName()+" "+employee.getLastName();
+            tempLeave.setManagerName(mname);
+            tempLeave.setRemarkdate(leaveApply.getRemarkdate());
+            tempLeave.setRemark(leaveApply.getRemark());
+       }
+      System.out.println(tempLeave);
         return tempLeave;
     }
 

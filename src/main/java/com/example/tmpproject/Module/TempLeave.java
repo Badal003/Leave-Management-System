@@ -11,6 +11,8 @@ public class TempLeave {
     private Date toDate;
     private Date applydate;
     private int status;
+    private String remark;
+    private Date remarkdate;
     private String leaveName;
     private String employeeName;
     private String managerName;
