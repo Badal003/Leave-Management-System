@@ -21,4 +21,6 @@ public class LeaveService
     public List<LeaveApply>findEmployeeLeaveByDepartment(int dept_id){return leaveRepositry.findEmployeeLeaveByDepartment(dept_id);}
     public List<LeaveApply> findLeaveByDepartment(int status,int dept_id){return  leaveRepositry.findLeaveByDepartment(status,dept_id);}
     public long countBystatus(int s,int dept_id){return  leaveRepositry.countBystatus(s,dept_id);}
+    public long countByEmployee(int emp_id){return  leaveRepositry.countByEmployee(emp_id);}
+    public long countByEmployeeAndStatus(int status,int emp_id){return leaveRepositry.countByemployeeAndstatus(status,emp_id);}
 }

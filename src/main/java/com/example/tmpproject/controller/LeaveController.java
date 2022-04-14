@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class LeaveController
@@ -232,4 +234,19 @@ public class LeaveController
         Department department=employee1.getDepartment();
         return leaveService.countBystatus(leavemodule.getStatus(),department.getDepartmentId());
     }
+    @PostMapping("/countleave")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Map<String,Long> countByEmployee(@RequestBody Leavemodule leavemodule)
+    {
+        System.out.println(String.valueOf(leavemodule));
+        Map<String,Long> countofleave=new HashMap<String,Long>();
+        long pendding=leaveService.countByEmployeeAndStatus(leavemodule.getEmployeeId(),0);
+        long approved=leaveService.countByEmployeeAndStatus(leavemodule.getEmployeeId(),1);
+        long notapproved=leaveService.countByEmployeeAndStatus(leavemodule.getEmployeeId(),2);
+        countofleave.put("pendding",pendding);
+        countofleave.put("approved",approved);
+        countofleave.put("notapproved",notapproved);
+        return countofleave;
+    }
+
 }

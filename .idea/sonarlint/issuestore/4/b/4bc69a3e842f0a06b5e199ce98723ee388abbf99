@@ -1,9 +1,0 @@
-
-_
-java:S1128"DRemove this unused import 'com.example.tmpproject.model.Department'.(ĞÅİÿÿÿÿÿ
-b
-java:S1128"LRemove this unused import 'org.springframework.data.repository.query.Param'.(©”šô
-k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âº”Çùÿÿÿÿ
-f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÅŸÏİ
-k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÛ¥úÿÿÿÿ
-r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı–Ø‡üÿÿÿÿ8Á­›¥ş/

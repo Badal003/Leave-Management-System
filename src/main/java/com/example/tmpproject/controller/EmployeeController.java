@@ -71,7 +71,7 @@ public class EmployeeController
         employeemodule1.setLastName(employee.getLastName());
         employeemodule1.setGender(employee.getGender());
         employeemodule1.setEmailId(employee.getEmailId());
-        employeemodule1.setPassword(GeneratePassword.generateRandomPassword());
+        employeemodule1.setPassword(employee.getPassword());
         employeemodule1.setMobileNumber(employee.getMobileNumber());
         employeemodule1.setDateOfBirth(employee.getDateOfBirth());
         employeemodule1.setDateOfJoin(employee.getDateOfJoin());
