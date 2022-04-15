@@ -132,7 +132,7 @@ public class EmployeeController
     @CrossOrigin(origins = "http://localhost:4200")
     public Employee updateEmployeeByUserRole(@RequestBody Employeemodule employeemodule)
     {
-        System.out.println(employeemodule);
+
         Employee employee=employeeService.findEmployee(employeemodule.getId());
         UserRole userRole=userRoleService.findUserRole(employeemodule.getUserroleId());
         employee.setUserRole(userRole);
@@ -145,10 +145,7 @@ public class EmployeeController
     public Employeemodule employeeLogin(@RequestBody Employeemodule employeemodule)
     {
         Employeemodule employeemodule1=new Employeemodule();
-        System.out.println(employeemodule);
-        System.out.println(employeemodule.getEmailId()+" "+employeemodule.getPassword());
         Employee employee=employeeService.findEmployeeByEmailandPassword(employeemodule.getEmailId(),employeemodule.getPassword());
-        System.out.println(employee);
         employeemodule1.setId(employee.getEmployeeId());
         employeemodule1.setFirstName(employee.getFirstName());
         employeemodule1.setMiddleName(employee.getMiddleName());
@@ -176,7 +173,7 @@ public class EmployeeController
         return employeeService.saveEmployee(employee);
     }
 
-    @PostMapping("/forgetpassword")
+        @PostMapping("/forgetpassword")
     @CrossOrigin(origins = "http://localhost:4200")
     public Employee forgetPassword(@RequestBody Employeemodule employeemodule) throws MessagingException {
         Employee employee=employeeService.findEmployeeByEmail(employeemodule.getEmailId());

@@ -22,4 +22,5 @@ public class EmployeeService
     public List<Employee> findEmployeeByDepartment(Department department){return employeeRepositry.findByDepartment(department);}
     public Employee findEmployeeByEmailandPassword(String email,String password){return employeeRepositry.findByEmailIdAndPassword(email,password);}
     public Employee findEmployeeByEmail(String email){return employeeRepositry.findByEmailId(email);}
+    public long countByDepartment(int dept_id){return employeeRepositry.countByDepartment(dept_id);}
 }

@@ -11,7 +11,7 @@ import com.example.tmpproject.service.EmployeeService;
 import com.example.tmpproject.service.LeaveService;
 import com.example.tmpproject.service.LeaveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,14 +80,14 @@ public class LeaveController
     @CrossOrigin(origins = "http://localhost:4200")
     public LeaveApply updateLeaveStatusById(@RequestBody Leavemodule leavemodule)
     {
-        System.out.println(leavemodule);
+
         LeaveApply leaveApply=null;
         leaveApply=leaveService.findLeave(leavemodule.getLeaveapplyId());
         leaveApply.setStatus(leavemodule.getStatus());
         leaveApply.setManager(employeeService.findEmployee(leavemodule.getManagerId()));
         leaveApply.setRemark(leavemodule.getRemark());
         leaveApply.setRemarkdate(CurrentDate.findCurrentDate());
-        System.out.println(leaveApply);
+
         return leaveService.saveLeave(leaveApply);
     }
     @PostMapping("/leaveofemployee")
@@ -221,7 +221,6 @@ public class LeaveController
             tempLeave.setRemarkdate(leaveApply.getRemarkdate());
             tempLeave.setRemark(leaveApply.getRemark());
        }
-      System.out.println(tempLeave);
         return tempLeave;
     }
 
@@ -234,19 +233,41 @@ public class LeaveController
         Department department=employee1.getDepartment();
         return leaveService.countBystatus(leavemodule.getStatus(),department.getDepartmentId());
     }
+
     @PostMapping("/countleave")
     @CrossOrigin(origins = "http://localhost:4200")
     public Map<String,Long> countByEmployee(@RequestBody Leavemodule leavemodule)
     {
-        System.out.println(String.valueOf(leavemodule));
         Map<String,Long> countofleave=new HashMap<String,Long>();
-        long pendding=leaveService.countByEmployeeAndStatus(leavemodule.getEmployeeId(),0);
-        long approved=leaveService.countByEmployeeAndStatus(leavemodule.getEmployeeId(),1);
-        long notapproved=leaveService.countByEmployeeAndStatus(leavemodule.getEmployeeId(),2);
-        countofleave.put("pendding",pendding);
+        long totalleave=leaveService.countByEmployee(leavemodule.getEmployeeId());
+        long pending=leaveService.countByEmployeeAndstatus(0,leavemodule.getEmployeeId());
+        long approved=leaveService.countByEmployeeAndstatus(1,leavemodule.getEmployeeId());
+        long notapproved=leaveService.countByEmployeeAndstatus(2,leavemodule.getEmployeeId());
+        countofleave.put("totalleave",totalleave);
+        countofleave.put("pending",pending);
         countofleave.put("approved",approved);
         countofleave.put("notapproved",notapproved);
         return countofleave;
     }
 
+    @PostMapping("/countmanagerleave")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Map<String,Long> countByManager(@RequestBody Leavemodule leavemodule)
+    {
+        Map<String,Long> countofleave=new HashMap<String,Long>();
+        Employee employee1=new Employee();
+        employee1=employeeService.findEmployee(leavemodule.getManagerId());
+        Department department=employee1.getDepartment();
+        long totalleave=leaveService.countLeaveByDepartment(department.getDepartmentId());
+        long totalemployee=employeeService.countByDepartment(department.getDepartmentId());
+        long pending=leaveService.countBystatus(leavemodule.getStatus(),department.getDepartmentId());
+        long approved=leaveService.countByManagerAndstatus(1,leavemodule.getManagerId());
+        long notapproved=leaveService.countByManagerAndstatus(2,leavemodule.getManagerId());
+        countofleave.put("totalleave",totalleave);
+        countofleave.put("totalemployee",totalemployee-1);
+        countofleave.put("pending",pending);
+        countofleave.put("approved",approved);
+        countofleave.put("notapproved",notapproved);
+        return countofleave;
+    }
 }
