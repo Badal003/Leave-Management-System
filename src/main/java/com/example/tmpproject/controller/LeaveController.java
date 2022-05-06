@@ -6,10 +6,7 @@ import com.example.tmpproject.model.Department;
 import com.example.tmpproject.model.Employee;
 import com.example.tmpproject.model.LeaveApply;
 import com.example.tmpproject.model.LeaveType;
-import com.example.tmpproject.service.DepartmentService;
-import com.example.tmpproject.service.EmployeeService;
-import com.example.tmpproject.service.LeaveService;
-import com.example.tmpproject.service.LeaveTypeService;
+import com.example.tmpproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,6 +30,9 @@ public class LeaveController
     private LeaveTypeService leaveTypeService;
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private DesignationService designationService;
 
     //employee can apply a leave
     @PostMapping("/addleave")
@@ -269,5 +269,23 @@ public class LeaveController
         countofleave.put("approved",approved);
         countofleave.put("notapproved",notapproved);
         return countofleave;
+    }
+
+    @PostMapping("/countadmin")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Map<String,Long> countByadmin()
+    {
+        Map<String,Long> counts=new HashMap<String,Long>();
+        long department=departmentService.count();
+        long manager=employeeService.countByUserRole(3);
+        long leavetype=leaveTypeService.count();
+        long employee=employeeService.count();
+        long designation=designationService.count();
+        counts.put("department",department);
+        counts.put("manager",manager);
+        counts.put("leavetype",leavetype);
+        counts.put("employee",employee);
+        counts.put("designation",designation);
+        return counts;
     }
 }

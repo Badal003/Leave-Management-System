@@ -19,5 +19,7 @@ public interface EmployeeRepositry extends JpaRepository<Employee,Integer>
     public Employee findByEmailId(String emailid);
     @Query(value = " select count(*) from employee where dept_id=:dept_id",nativeQuery = true)
     public long countByDepartment(int dept_id);
+    @Query(value = " select count(*) from employee where ur_id=:ur_id",nativeQuery = true)
+    public long countByUserRole(int ur_id);
 
 }

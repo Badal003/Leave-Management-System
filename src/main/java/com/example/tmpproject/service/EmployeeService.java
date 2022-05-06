@@ -23,4 +23,5 @@ public class EmployeeService
     public Employee findEmployeeByEmailandPassword(String email,String password){return employeeRepositry.findByEmailIdAndPassword(email,password);}
     public Employee findEmployeeByEmail(String email){return employeeRepositry.findByEmailId(email);}
     public long countByDepartment(int dept_id){return employeeRepositry.countByDepartment(dept_id);}
+    public long countByUserRole(int ur_id){return employeeRepositry.countByUserRole(ur_id);}
 }
